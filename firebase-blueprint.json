@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and account information",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "user"],
+          "description": "User role"
+        },
+        "totalScans": {
+          "type": "number",
+          "description": "Total number of URLs scanned by the user"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of account creation"
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "description": "ISO timestamp of last sign-in"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "suspended"],
+          "description": "Account status"
+        }
+      },
+      "required": ["email", "role", "totalScans", "createdAt", "status"]
+    },
+    "ScanRecord": {
+      "title": "ScanRecord",
+      "description": "Historical URL scan incident",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User ID or 'guest'"
+        },
+        "userEmail": {
+          "type": "string",
+          "description": "User email or 'guest'"
+        },
+        "url": {
+          "type": "string",
+          "description": "Scanned target URL"
+        },
+        "defangedUrl": {
+          "type": "string",
+          "description": "Defanged safe URL"
+        },
+        "verdict": {
+          "type": "string",
+          "description": "Classification verdict"
+        },
+        "probability": {
+          "type": "number",
+          "description": "Phishing probability percentage"
+        },
+        "riskLevel": {
+          "type": "string",
+          "description": "Risk level category"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "ISO timestamp of scan"
+        }
+      },
+      "required": ["userId", "url", "defangedUrl", "verdict", "probability", "riskLevel", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User account documents keyed by Firebase Auth UID"
+    },
+    "/scans/{scanId}": {
+      "schema": "ScanRecord",
+      "description": "Audit log of all URL security scans"
+    }
+  }
+}

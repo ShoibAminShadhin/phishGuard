@@ -1,0 +1,6 @@
+{
+  "name": "PhishGuard ML - Intelligent URL Phishing Detection",
+  "description": "Machine learning powered phishing detection platform that extracts lexical, structural, and brand features to flag malicious URLs with explainable AI and neural threat analysis.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
